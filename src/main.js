@@ -1,6 +1,8 @@
 import Vue from "vue";
 import App from "./App";
 
+import router from "@/router";
+
 Vue.config.productionTip = false;
 
 //组件3大步:定义.注册.使用
@@ -12,4 +14,5 @@ new Vue({
   //   App,
   // },
   // template: "<App />",
+  router,
 }).$mount("#app");
