@@ -9,9 +9,9 @@
           <p>
             <span>请</span>
             <!-- <a href="###">登录</a> -->
-            <router-link to="login">登录</router-link>
+            <router-link to="/login">登录</router-link>
             <!-- <a href="###" class="register">免费注册</a> -->
-            <router-link to="register" class="register">免费注册</router-link>
+            <router-link to="/register" class="register">免费注册</router-link>
           </p>
         </div>
         <div class="typeList">
@@ -32,7 +32,7 @@
         <!-- <a class="logo" title="尚品汇" href="###" target="_blank">
           <img src="./images/logo.png" alt="" />
         </a> -->
-        <router-link to="home" class="logo" title="尚品汇">
+        <router-link to="/home" class="logo" title="尚品汇">
           <img src="./images/logo.png" alt="" />
         </router-link>
       </h1>
@@ -42,6 +42,8 @@
             type="text"
             id="autocomplete"
             class="input-error input-xxlarge"
+            autocomplete="off"
+            v-model="keyword"
           />
           <button
             class="sui-btn btn-xlarge btn-danger"
@@ -59,9 +61,36 @@
 <script>
 export default {
   name: "Header",
+  data() {
+    return {
+      keyword: "",
+    };
+  },
   methods: {
     handleSearch() {
-      this.$router.push("search");
+      //1.对象语法
+      //当传递参数有params参数时,对象写法必须是name和params组合
+      //query无所谓
+
+      //2.怎么指定params参数可传可不传
+      //在路由路径当中获取params参数后加?
+
+      //3.传递params参数是空串,路径会出问题
+      //要么不指定params参数,要么指定参数为undefined,前提是指定可传可不传
+      let location = {
+        name: "Search",
+        params: {
+          //在前后端交互中undefined是指不传参
+          keyword: this.keyword || undefined,
+        },
+        query: {
+          keyword: this.keyword.toUpperCase(),
+        },
+      };
+      this.$router.push(location);
+      // .catch(() => {});  不优秀
+
+      this.keyword = "";
     },
   },
 };
