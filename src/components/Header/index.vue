@@ -78,17 +78,19 @@ export default {
       //3.传递params参数是空串,路径会出问题
       //要么不指定params参数,要么指定参数为undefined,前提是指定可传可不传
       let location = {
-        name: "Search",
+        name: "search",
         params: {
           //在前后端交互中undefined是指不传参
           keyword: this.keyword || undefined,
         },
-        query: {
-          keyword: this.keyword.toUpperCase(),
-        },
+        // query: {
+        //   keyword: this.keyword,
+        // },
       };
+      location.query = this.$route.query ? this.$route.query : "";
+
       this.$router.push(location);
-      // .catch(() => {});  不优秀
+      // .catch((err) => err);  不优秀
 
       this.keyword = "";
     },

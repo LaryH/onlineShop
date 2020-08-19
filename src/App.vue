@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 export default {
@@ -14,6 +15,12 @@ export default {
   components: {
     Header,
     Footer,
+  },
+  methods: {
+    ...mapActions(["getCategoryList"]),
+  },
+  mounted() {
+    this.getCategoryList();
   },
 };
 </script>
